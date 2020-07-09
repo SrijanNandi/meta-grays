@@ -1,0 +1,20 @@
+[Unit]
+Description=OpenSSH server daemon
+Documentation=man:sshd(8) man:sshd_config(5)
+After=network.target sshdgenkeys.service
+Wants=sshdgenkeys.service
+
+[Service]
+Type=forking
+PIDFile=@localstatedir@/run/sshd.pid
+EnvironmentFile=-@SYSCONFDIR@/sysconfig/sshd
+ExecStartPre=@SBINDIR@/sshd -t
+ExecStart=@SBINDIR@/sshd -D $SSHD_OPTS
+ExecReload=@SBINDIR@/sshd -t
+ExecReload=@BASE_BINDIR@/kill -HUP $MAINPID
+KillMode=process
+Restart=on-failure
+RestartSec=42s
+
+[Install]
+WantedBy=multi-user.target
