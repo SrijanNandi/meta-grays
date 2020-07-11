@@ -14,3 +14,6 @@ LINUX_VERSION_genericx86 = "5.2.17"
 LINUX_VERSION_genericx86-64 = "5.2.17"
 
 LINUX_VERSION_EXTENSION = "-grays-${LINUX_KERNEL_TYPE}"
+
+FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+SRC_URI += "file://defconfig"
