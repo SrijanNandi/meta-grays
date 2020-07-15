@@ -6,12 +6,12 @@ Wants=sshdgenkeys.service
 
 [Service]
 Type=forking
-PIDFile=@localstatedir@/run/sshd.pid
-EnvironmentFile=-@SYSCONFDIR@/sysconfig/sshd
-ExecStartPre=@SBINDIR@/sshd -t
-ExecStart=@SBINDIR@/sshd -D $SSHD_OPTS
-ExecReload=@SBINDIR@/sshd -t
-ExecReload=@BASE_BINDIR@/kill -HUP $MAINPID
+PIDFile=/run/sshd.pid
+EnvironmentFile=-/etc/sysconfig/ssh
+ExecStartPre=/usr/sbin/sshd -t
+ExecStart=/usr/sbin/sshd -D $SSHD_OPTS
+ExecReload=/usr/sbin/sshd -t
+ExecReload=/bin/kill -HUP $MAINPID
 KillMode=process
 Restart=on-failure
 RestartSec=42s

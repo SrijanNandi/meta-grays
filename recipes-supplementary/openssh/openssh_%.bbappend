@@ -8,6 +8,7 @@ SYSTEMD_AUTO_ENABLE = "disable"
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 SRC_URI += "file://ssh \
+           file://sshd.service \
            "
 
 do_install_append () {
@@ -23,6 +24,7 @@ do_install_append () {
         sed -i 's/#PermitEmptyPasswords no/PermitEmptyPasswords no/' ${D}${sysconfdir}/ssh/sshd_config
 
         install -m 0644 ${WORKDIR}/ssh ${D}${sysconfdir}/default/ssh
+        install -m 0644 ${WORKDIR}/sshd.service ${D}${systemd_unitdir}/system
 
 }
 
