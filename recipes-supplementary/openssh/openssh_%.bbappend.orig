@@ -7,8 +7,10 @@ and for executing commands on a remote machine."
 SYSTEMD_AUTO_ENABLE = "disable"
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
-SRC_URI += "file://sshd \
+SRC_URI += "file://ssh \
+           file://sshd.service \
            "
+
 do_install_append () {
         sed -i 's/#Port 22/Port 2224/' ${D}${sysconfdir}/ssh/sshd_config
         sed -i 's/#ListenAddress 0.0.0.0/ListenAddress 0.0.0.0/' ${D}${sysconfdir}/ssh/sshd_config
@@ -21,6 +23,8 @@ do_install_append () {
         sed -i 's/#MaxSessions 10/MaxSessions 5/' ${D}${sysconfdir}/ssh/sshd_config
         sed -i 's/#PermitEmptyPasswords no/PermitEmptyPasswords no/' ${D}${sysconfdir}/ssh/sshd_config
 
-        install -m 0644 ${WORKDIR}/sshd ${D}${sysconfdir}/default/sshd
+        install -m 0644 ${WORKDIR}/ssh ${D}${sysconfdir}/default/ssh
+        install -m 0644 ${WORKDIR}/sshd.service ${D}${systemd_unitdir}/system
+
 }
 
