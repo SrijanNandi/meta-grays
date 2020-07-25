@@ -86,4 +86,4 @@ path.logs: /var/log/elasticsearch
 # Require explicit names when deleting indices:
 #
 #action.destructive_requires_name: true
-action.auto_create_index: false
+action.auto_create_index: ".security,.monitoring*,.watches,.triggered_watches,.watcher-history*"

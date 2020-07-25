@@ -17,7 +17,7 @@ USERADD_PARAM_${PN} = " \
     ${PN}"
 
 SYSTEMD_SERVICE_${PN} = "mongod.service"
-SYSTEMD_AUTO_ENABLE = "disable"
+SYSTEMD_AUTO_ENABLE = "enable"
 
 do_install_append() {
         install -d ${D}${sysconfdir}
