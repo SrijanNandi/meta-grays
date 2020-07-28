@@ -13,17 +13,16 @@ do_compile () {
 
 do_install () {
     install -d ${D}/${sbindir}
-    install -m 0755 ${WORKDIR}/initscript.sh ${D}/${sbindir}
+    install -c -m 0755 ${WORKDIR}/initscript.sh ${D}/${sbindir}
     
     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
         install -d ${D}${systemd_unitdir}/system/
-        install -m 0644 ${WORKDIR}/initscript.service ${D}${systemd_unitdir}/system
+        install -c -m 0644 ${WORKDIR}/initscript.service ${D}${systemd_unitdir}/system
     fi
 }
 
 NATIVE_SYSTEMD_SUPPORT = "1"
 SYSTEMD_PACKAGES = "${PN}"
 SYSTEMD_SERVICE_${PN} = "initscript.service"
-SYSTEMD_AUTO_ENABLE = "disable"
 
 inherit allarch systemd

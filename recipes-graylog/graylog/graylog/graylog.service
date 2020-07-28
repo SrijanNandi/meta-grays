@@ -1,8 +1,8 @@
 [Unit]
 Description=Graylog server
 Documentation=http://docs.graylog.org/
-Wants=network-online.target
-After=network-online.target
+Wants=network-online.target elasticsearch.service
+After=network-online.target elasticsearch.service
 
 [Service]
 Type=simple
@@ -12,7 +12,7 @@ User=graylog
 Group=graylog
 LimitNOFILE=64000
 
-ExecStart=/usr/share/graylog/bin/graylogctl -p /var/run/graylog.pid
+ExecStart=/usr/share/graylog/bin/graylog-server
 
 # When a JVM receives a SIGTERM signal it exits with 143.
 SuccessExitStatus=143

@@ -38,7 +38,6 @@ USERADD_PARAM_${PN} = " \
 
 SYSTEMD_PACKAGES += "${BPN}"
 SYSTEMD_SERVICE_${PN} = "elasticsearch.service"
-SYSTEMD_AUTO_ENABLE = "disable"
 
 do_compile() {
 }
@@ -74,6 +73,7 @@ do_install() {
 
 FILES_${PN} += "${systemd_system_unitdir}"
 FILES_${PN} += "${datadir}"
+FILES_${PN} += "${localstatedir}"
 
 INHIBIT_PACKAGE_STRIP = "1"
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
