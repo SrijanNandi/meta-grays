@@ -5,7 +5,6 @@ logger "Starting basic configuration"
 # do some work here. Mount rootfs as rw if needed.
 SURICATA_CONF_FILE="/etc/suricata/suricata.yaml"
 INT_NAME=`ip link | awk -F: '$0 !~ "lo|vir|wl|^[^0-9]"{print $2;getline}' | sort | uniq -D -w3`
-INT_COUNT=`ip link | awk -F: '$0 !~ "lo|vir|wl|^[^0-9]"{print $2;getline}' | sort | uniq -D -w3 | wc -l`
 PROC_COUNT=`/usr/bin/nproc --all`
 
 declare -a array=($(echo "$INT_NAME" | tr ' ' '\n'))

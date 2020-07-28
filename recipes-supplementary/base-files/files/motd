@@ -1,0 +1,15 @@
+###############################################################################
+#                                                                             #
+#            Welcome to GrayS (Graylog Distribution with Suricata)            #
+#                                                                             #
+###############################################################################
+
+!!!! ATTENTION !!!!
+You are required to change your password immediately. Log in as root and
+change passwords of graysadmin and root.
+
+passwd root followed by passwd graysadmin
+
+All connections are monitored and recorded.
+
+Disconnect IMMEDIATELY if you are not an authorized user!!
