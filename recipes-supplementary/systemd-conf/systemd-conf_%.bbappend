@@ -17,4 +17,5 @@ do_install_append() {
     install -m 0644 ${WORKDIR}/eth.network ${D}${sysconfdir}/systemd/network
     install -m 0644 ${WORKDIR}/en.network ${D}${sysconfdir}/systemd/network
     install -m 0644 ${WORKDIR}/wlan.network ${D}${sysconfdir}/systemd/network
+    rm -r ${D}${systemd_unitdir}/network/80-wired.network
 }

@@ -1,5 +1,6 @@
 [Unit]
 Description=start initscript upon first boot
+Before=graylog.service
 
 [Service]
 Type=simple

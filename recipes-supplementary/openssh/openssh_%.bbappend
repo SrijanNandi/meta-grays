@@ -22,7 +22,8 @@ do_install_append () {
         sed -i 's/#MaxAuthTries 6/MaxAuthTries 4/' ${D}${sysconfdir}/ssh/sshd_config
         sed -i 's/#MaxSessions 10/MaxSessions 5/' ${D}${sysconfdir}/ssh/sshd_config
         sed -i 's/#PermitEmptyPasswords no/PermitEmptyPasswords no/' ${D}${sysconfdir}/ssh/sshd_config
-  
+        sed -i 's/UsePAM yes/UsePAM no/' ${D}${sysconfdir}/ssh/sshd_config
+        
         install -d ${D}${sysconfdir} ${D}${sysconfdir}/default
         install -m 0644 ${WORKDIR}/sshd ${D}${sysconfdir}/default
 }

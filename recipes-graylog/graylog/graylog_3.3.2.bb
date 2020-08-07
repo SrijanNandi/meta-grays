@@ -35,7 +35,7 @@ USERADD_PARAM_${PN} = " \
 
 SYSTEMD_PACKAGES += "${BPN}"
 SYSTEMD_SERVICE_${PN} = "graylog.service"
-SYSTEMD_AUTO_ENABLE = "disable"
+SYSTEMD_AUTO_ENABLE = "enable"
 
 do_compile() {
 }

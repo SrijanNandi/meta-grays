@@ -2,7 +2,8 @@
 
 logger "Starting basic configuration"
 
-# do some work here. Mount rootfs as rw if needed.
+## Suricata configuration changes.
+
 SURICATA_CONF_FILE="/etc/suricata/suricata.yaml"
 INT_NAME=`ip link | awk -F: '$0 !~ "lo|vir|wl|^[^0-9]"{print $2;getline}' | sort | uniq -D -w3`
 PROC_COUNT=`/usr/bin/nproc --all`
@@ -10,8 +11,8 @@ PROC_COUNT=`/usr/bin/nproc --all`
 declare -a array=($(echo "$INT_NAME" | tr ' ' '\n'))
 
 ITER=1
-THREADS_COUNT=$(($PROC_COUNT-2))
-for ((i=0; i<${#array[@]}; i+=2)); do
+THREADS_COUNT=$(($PROC_COUNT-1))
+for ((i=0; i<${#array[@]}-1; i+=2)); do
    TMP_FILE="/tmp/suricata.temp$i"
    cat << 'EOF' > $TMP_FILE
   - interface: FIRST_INT
@@ -66,7 +67,20 @@ sed -i '/AF_PACKET/d' $SURICATA_CONF_FILE
 rm -rf /tmp/suricata.temp*
 rm -rf /tmp/newfile.temp*
 
+## Graylog configuration changes
+
+GRAYLOG_CONF="/etc/graylog/server/server.conf"
+SEC_PWD=`/usr/bin/ranpwd --alphanum --lower 96`
+ROOT_PWD=`/bin/echo -n "grays" | /usr/bin/tr -d '\n' | /usr/bin/sha256sum | /usr/bin/cut -d" " -f1`
+
+if [ -f ${GRAYLOG_CONF} ]; then
+	cp -r ${GRAYLOG_CONF} ${GRAYLOG_CONF}.ORIG
+fi
+
+sed -i "s/password_secret =/password_secret = ${SEC_PWD}/g" ${GRAYLOG_CONF}
+sed -i "s/root_password_sha2 =/root_password_sha2 = ${ROOT_PWD}/g" ${GRAYLOG_CONF}
+
 logger "Configuration done"
 
-#job done, remove it from systemd services
+## Job done, remove it from systemd services
 systemctl disable initscript.service
