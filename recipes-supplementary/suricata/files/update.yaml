@@ -49,9 +49,9 @@ sources:
 # directory or a wild card specification.
 local:
   # A directory of rules.
-  - /etc/suricata/rules
+  #- /etc/suricata/rules
   # A single rule file.
-  - /etc/suricata/rules/app-layer-events.rules
+  #- /etc/suricata/rules/app-layer-events.rules
   # A wildcard.
-  - /etc/suricata/rules/*.rules
+  #- /etc/suricata/rules/*.rules
   - /var/lib/suricata/rules/*.rules
