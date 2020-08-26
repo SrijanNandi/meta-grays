@@ -219,7 +219,7 @@ outputs:
   # The interval field (in seconds) tells after how long output will be written
   # on the log file.
   - stats:
-      enabled: yes
+      enabled: no
       filename: stats.log
       interval: 8
 
@@ -862,7 +862,7 @@ ipfw:
 
 # Set the default rule path here to search for the files.
 # if not set, it will look at the current working dir
-default-rule-path: /etc/suricata/rules
+default-rule-path: /var/lib/suricata/rules
 rule-files:
  - botcc.rules
  - ciarmy.rules
