@@ -1,10 +1,10 @@
 #!/bin/sh
 
-if pgrep -a -F /var/run/sshd.pid sshd >/dev/null 2>&1; then
+if sudo pgrep -a -F /var/run/sshd.pid sshd >/dev/null 2>&1; then
         read -p "SSHD is currently enabled. Would you like to disable? [y/n]? " yn
         case $yn in
             [Yy]* ) sudo systemctl stop sshd
-		    sleep 2
+		    sudo sleep 2
 		    ;;
             [Nn]* ) exit
 		    ;;
@@ -15,7 +15,7 @@ else
         read -p "SSHD is currently disabled. Would you like to enable? [y/n]? " yn
         case $yn in
             [Yy]* ) sudo systemctl start sshd
-		    sleep 2
+		    sudo sleep 2
 		    ;;
             [Nn]* ) exit
 		    ;;

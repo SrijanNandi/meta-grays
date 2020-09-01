@@ -1,8 +1,8 @@
 #!/bin/sh
 
-INT_NAME_COUNT=`/sbin/ip link | awk -F: '$0 !~ "lo|vir|wl|^[^0-9]"{print $2;getline}' | sort | uniq -D -w3 | wc -l`
-PROC_COUNT=`/usr/bin/nproc --all`
-MEMORY=`/usr/bin/free -m | awk '/^Mem:/{print $2}'`
+INT_NAME_COUNT=`sudo /sbin/ip link | sudo awk -F: '$0 !~ "lo|vir|wl|^[^0-9]"{print $2;getline}' | sudo sort | sudo uniq -D -w3 | sudo wc -l`
+PROC_COUNT=`sudo /usr/bin/nproc --all`
+MEMORY=`sudo /usr/bin/free -m | awk '/^Mem:/{print $2}'`
 
 function min_requirements {
     if [ "$INT_NAME_COUNT" -le "0" ]; then
@@ -24,12 +24,12 @@ function min_requirements {
     fi
 }
 
-if ps aux | grep "suricata" | grep -v 'grep\|vi\|vim' >/dev/null; then
+if sudo ps aux | sudo grep "suricata" | sudo grep -v 'grep\|vi\|vim' >/dev/null; then
         read -p "IPS Engine is currently enabled. Would you like to disable? [y/n]? " yn
         case $yn in
             [Yy]* ) 
 		    sudo systemctl stop suricata
-		    sleep 2
+		    sudo sleep 2
 		    ;;
             [Nn]* ) 
 		    exit
@@ -44,7 +44,7 @@ else
             [Yy]* ) 
 		    min_requirements
 		    sudo systemctl enable suricata && sudo systemctl start suricata
-		    sleep 2
+		    sudo sleep 2
 		    ;;
             [Nn]* ) 
 		    exit
