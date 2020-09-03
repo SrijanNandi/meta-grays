@@ -54,10 +54,10 @@ case ${OPMODE} in
 	sudo /usr/bin/passwd root
 	;;
 5)
-	sudo shutdown -r now
+	sudo /sbin/shutdown -r now
 	;;
 6)
-	sudo hutdown -h now
+	sudo /sbin/shutdown -h now
 	;;
 7)
 	sudo /etc/rc.initial.ping
