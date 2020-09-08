@@ -8,6 +8,7 @@ SRC_URI = "file://rc.initial \
            file://rc.initial.ping \
            file://rc.initial.showports \
            file://rc.initial.toggle_sshd \
+           file://rc.initial.setinterfaceip \
           "
 
 do_compile() {
@@ -19,6 +20,7 @@ do_install() {
     install -c -m 0755 ${WORKDIR}/rc.initial.toggle_ips ${D}${sysconfdir}/rc.initial.toggle_ips
     install -c -m 0755 ${WORKDIR}/rc.initial.ping ${D}${sysconfdir}/rc.initial.ping
     install -c -m 0755 ${WORKDIR}/rc.initial.showports ${D}${sysconfdir}/rc.initial.showports
+    install -c -m 0755 ${WORKDIR}/rc.initial.setinterfaceip ${D}${sysconfdir}/rc.initial.setinterfaceip
     install -c -m 0755 ${WORKDIR}/rc.initial.toggle_sshd ${D}${sysconfdir}/rc.initial.toggle_sshd
 }
 
