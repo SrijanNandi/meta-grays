@@ -1,7 +1,7 @@
 SUMMARY = "Graylog"
 DESCRIPTION = "Graylog"
 HOMEPAGE = "https://www.graylog.org"
-LICENSE = "Apache-2.0"
+LICENSE = "GPL-3.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
 REQUIRED_DISTRO_FEATURES = "systemd"
