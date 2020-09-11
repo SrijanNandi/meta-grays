@@ -112,16 +112,17 @@ for ((i=0; i<=${#array[@]}; i+=1)); do
 		           /bin/rm -rf /etc/systemd/network/en.network
 			   wan_interface_file
 			   /bin/cp /tmp/${array[$i]}.network /etc/systemd/network
+			   sudo /bin/systemctl restart systemd-networkd
 		       elif [ $CHOICE == "LAN" ]; then
 			   /bin/rm -rf /etc/systemd/network/en.network
 		           lan_interface_file
 			   /bin/cp /tmp/${array[$i]}.network /etc/systemd/network
+			   sudo /bin/systemctl restart systemd-networkd
 		       else
 		           echo ""
 		       fi
 	  	       ;;
 		* )
-		#       echo -e "Please choose the correct number."
 		       ;;
     esac
 done
