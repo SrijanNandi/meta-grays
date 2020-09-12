@@ -109,14 +109,14 @@ for ((i=0; i<=${#array[@]}; i+=1)); do
     case $NUM in
         [$(($i+1))]* ) read -p "Do you want to configure it as WAN or LAN: " CHOICE
 		       if [ $CHOICE == "WAN" ]; then
-		           /bin/rm -rf /etc/systemd/network/en.network
+		           sudo /bin/rm -rf /etc/systemd/network/en.network
 			   wan_interface_file
-			   /bin/cp /tmp/${array[$i]}.network /etc/systemd/network
+			   sudo /bin/cp /tmp/${array[$i]}.network /etc/systemd/network
 			   sudo /bin/systemctl restart systemd-networkd
 		       elif [ $CHOICE == "LAN" ]; then
-			   /bin/rm -rf /etc/systemd/network/en.network
+			   sudo /bin/rm -rf /etc/systemd/network/en.network
 		           lan_interface_file
-			   /bin/cp /tmp/${array[$i]}.network /etc/systemd/network
+			   sudo /bin/cp /tmp/${array[$i]}.network /etc/systemd/network
 			   sudo /bin/systemctl restart systemd-networkd
 		       else
 		           echo ""
