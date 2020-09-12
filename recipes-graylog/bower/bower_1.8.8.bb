@@ -1,75 +1,7 @@
-# Recipe created by recipetool
-# This is the basis of a recipe and may need further editing in order to be fully functional.
-# (Feel free to remove these comments when editing.)
-
 SUMMARY = "The browser package manager"
 HOMEPAGE = "http://bower.io"
 # WARNING: the following LICENSE and LIC_FILES_CHKSUM values are best guesses - it is
 # your responsibility to verify that the values are complete and correct.
-#
-# The following license files were not able to be identified and are
-# represented as "Unknown" below, you will need to check them yourself:
-#   lib/node_modules/jsbn/LICENSE
-#   lib/node_modules/requireg/LICENSE
-#   lib/node_modules/requireg/node_modules/rc/LICENSE.BSD
-#   lib/node_modules/requireg/node_modules/rc/LICENSE.APACHE2
-#   lib/node_modules/tunnel-agent/LICENSE
-#   lib/node_modules/cardinal/LICENSE
-#   lib/node_modules/oauth-sign/LICENSE
-#   lib/node_modules/inquirer/node_modules/lodash/LICENSE
-#   lib/node_modules/rc/LICENSE.BSD
-#   lib/node_modules/rc/LICENSE.APACHE2
-#   lib/node_modules/dashdash/LICENSE.txt
-#   lib/node_modules/spdx-license-ids/LICENSE
-#   lib/node_modules/spdx-license-ids/spdx-license-ids.json
-#   lib/node_modules/boom/LICENSE
-#   lib/node_modules/boom/node_modules/hoek/LICENSE
-#   lib/node_modules/retry/License
-#   lib/node_modules/process-nextick-args/license.md
-#   lib/node_modules/bower-registry-client/node_modules/qs/LICENSE
-#   lib/node_modules/bower-registry-client/node_modules/tunnel-agent/LICENSE
-#   lib/node_modules/bower-registry-client/node_modules/tough-cookie/LICENSE
-#   lib/node_modules/bower-registry-client/node_modules/caseless/LICENSE
-#   lib/node_modules/bower-registry-client/node_modules/request/LICENSE
-#   lib/node_modules/amdefine/LICENSE
-#   lib/node_modules/spdx-correct/LICENSE
-#   lib/node_modules/semver/LICENSE
-#   lib/node_modules/ansicolors/LICENSE
-#   lib/node_modules/verror/LICENSE
-#   lib/node_modules/hawk/LICENSE
-#   lib/node_modules/hawk/node_modules/hoek/LICENSE
-#   lib/node_modules/jsprim/LICENSE
-#   lib/node_modules/uglify-js/LICENSE
-#   lib/node_modules/uglify-js/node_modules/source-map/LICENSE
-#   lib/node_modules/normalize-package-data/LICENSE
-#   lib/node_modules/redeyed/LICENSE
-#   lib/node_modules/caseless/LICENSE
-#   lib/node_modules/through/LICENSE.APACHE2
-#   lib/node_modules/sntp/LICENSE
-#   lib/node_modules/sntp/node_modules/hoek/LICENSE
-#   lib/node_modules/readable-stream/LICENSE
-#   lib/node_modules/readable-stream/node_modules/string_decoder/LICENSE
-#   lib/node_modules/configstore/node_modules/uuid/LICENSE.md
-#   lib/node_modules/isstream/LICENSE.md
-#   lib/node_modules/tar-stream/node_modules/bl/LICENSE.md
-#   lib/node_modules/cryptiles/LICENSE
-#   lib/node_modules/ecc-jsbn/lib/LICENSE-jsbn
-#   lib/node_modules/touch/node_modules/nopt/LICENSE
-#   lib/node_modules/request/LICENSE
-#   lib/node_modules/request/node_modules/qs/LICENSE
-#   lib/node_modules/request/node_modules/tough-cookie/LICENSE
-#   lib/node_modules/bl/LICENSE.md
-#   lib/node_modules/tweetnacl/LICENSE
-#   lib/node_modules/extsprintf/LICENSE
-#   lib/node_modules/asn1/LICENSE
-#   lib/node_modules/traverse/LICENSE
-#   lib/node_modules/fs.realpath/LICENSE
-#   lib/node_modules/validate-npm-package-license/LICENSE
-#   lib/node_modules/forever-agent/LICENSE
-#   lib/node_modules/aws-sign2/LICENSE
-#   lib/node_modules/lodash/LICENSE
-#   lib/node_modules/duplexer2/LICENSE.md
-#   lib/node_modules/balanced-match/LICENSE.md
 #
 # NOTE: multiple licenses have been detected; they have been separated with &
 # in the LICENSE value for now since it is a reasonable assumption that all
@@ -77,8 +9,8 @@ HOMEPAGE = "http://bower.io"
 # licenses then you should change the value to separate the licenses with |
 # instead of &. If there is any doubt, check the accompanying documentation
 # to determine which situation is applicable.
-LICENSE = "BSD & PD & Unlicense & BSD-2-Clause & Apache-2.0 & \
-(BSD-3-Clause | MIT) & ISC & Unknown & BSD-3-Clause & MIT & APACHEv2"
+LICENSE = "BSD & PD & BSD-2-Clause & Apache-2.0 & \
+(BSD-3-Clause | MIT) & ISC & CLOSED & BSD-3-Clause & MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b9d0f27ea752b176045383eb2d1f3ce0 \
                     file://lib/node_modules/lazy-cache/LICENSE;md5=a0bd3ad96ad6f399ce73b75ce8332105 \
                     file://lib/node_modules/pump/LICENSE;md5=9befe7026bf915886cd566a98117c80e \
@@ -376,14 +308,17 @@ SRC_URI = "npm://registry.npmjs.org/;name=bower;version=${PV}"
 
 NPM_SHRINKWRAP := "${THISDIR}/${PN}/npm-shrinkwrap.json"
 
-inherit npm
+inherit npm license sstate
+
+RDEPENDS_${PN} += "bash"
+RDEPENDS_${PN}-lib-node-uuid += "bash"
 
 # Must be set after inherit npm since that itself sets S
 S = "${WORKDIR}/npmpkg"
 LICENSE_${PN}-lib-abbrev = "ISC"
 LICENSE_${PN}-lib-ajv = "MIT"
 LICENSE_${PN}-lib-align-text = "MIT"
-LICENSE_${PN}-lib-amdefine = "(BSD-3-Clause_|_MIT)"
+LICENSE_${PN}-lib-amdefine = "BSD-3-Clause"
 LICENSE_${PN}-lib-ansi-escapes = "MIT"
 LICENSE_${PN}-lib-ansi-regex = "MIT"
 LICENSE_${PN}-lib-ansicolors = "MIT"
@@ -421,7 +356,7 @@ LICENSE_${PN}-lib-bower-registry-client-tunnel-agent = "Apache-2.0"
 LICENSE_${PN}-lib-bower-registry-client = "MIT"
 LICENSE_${PN}-lib-boxen = "MIT"
 LICENSE_${PN}-lib-brace-expansion = "MIT"
-LICENSE_${PN}-lib-buffers = "Unknown"
+LICENSE_${PN}-lib-buffers = "CLOSED"
 LICENSE_${PN}-lib-builtin-modules = "MIT"
 LICENSE_${PN}-lib-camelcase-keys-camelcase = "MIT"
 LICENSE_${PN}-lib-camelcase-keys = "MIT"
@@ -463,7 +398,7 @@ LICENSE_${PN}-lib-delayed-stream = "MIT"
 LICENSE_${PN}-lib-destroy = "MIT"
 LICENSE_${PN}-lib-dot-prop = "MIT"
 LICENSE_${PN}-lib-duplexer2 = "BSD-3-Clause"
-LICENSE_${PN}-lib-ecc-jsbn = "Unknown MIT"
+LICENSE_${PN}-lib-ecc-jsbn = "CLOSED MIT"
 LICENSE_${PN}-lib-end-of-stream = "MIT"
 LICENSE_${PN}-lib-ends-with = "MIT"
 LICENSE_${PN}-lib-error-ex = "MIT"
@@ -534,7 +469,7 @@ LICENSE_${PN}-lib-isarray = "MIT"
 LICENSE_${PN}-lib-isexe = "ISC"
 LICENSE_${PN}-lib-isstream = "MIT"
 LICENSE_${PN}-lib-jsbn = "MIT"
-LICENSE_${PN}-lib-json-schema = "Unknown"
+LICENSE_${PN}-lib-json-schema = "CLOSED"
 LICENSE_${PN}-lib-json-stable-stringify = "MIT"
 LICENSE_${PN}-lib-json-stringify-safe = "ISC"
 LICENSE_${PN}-lib-jsonify = "PD"
@@ -602,7 +537,7 @@ LICENSE_${PN}-lib-promptly = "MIT"
 LICENSE_${PN}-lib-pump = "MIT"
 LICENSE_${PN}-lib-punycode = "MIT"
 LICENSE_${PN}-lib-q = "MIT"
-LICENSE_${PN}-lib-rc = "Unknown MIT"
+LICENSE_${PN}-lib-rc = "CLOSED MIT"
 LICENSE_${PN}-lib-read-all-stream = "MIT"
 LICENSE_${PN}-lib-read-mute-stream = "ISC"
 LICENSE_${PN}-lib-read-pkg-up = "MIT"
@@ -612,7 +547,7 @@ LICENSE_${PN}-lib-readable-stream = "MIT"
 LICENSE_${PN}-lib-readline2 = "MIT"
 LICENSE_${PN}-lib-read = "ISC"
 LICENSE_${PN}-lib-redent = "MIT"
-LICENSE_${PN}-lib-redeyed-esprima = "Unknown"
+LICENSE_${PN}-lib-redeyed-esprima = "CLOSED"
 LICENSE_${PN}-lib-redeyed = "MIT"
 LICENSE_${PN}-lib-registry-auth-token = "MIT"
 LICENSE_${PN}-lib-registry-url = "MIT"
@@ -627,35 +562,35 @@ LICENSE_${PN}-lib-request-tough-cookie = "BSD-3-Clause"
 LICENSE_${PN}-lib-request = "Apache-2.0"
 LICENSE_${PN}-lib-requireg-deep-extend = "MIT"
 LICENSE_${PN}-lib-requireg-minimist = "MIT"
-LICENSE_${PN}-lib-requireg-rc = "Unknown MIT"
-LICENSE_${PN}-lib-requireg-resolve-test-resolver-biz-garply = "Unknown"
+LICENSE_${PN}-lib-requireg-rc = "CLOSED MIT"
+LICENSE_${PN}-lib-requireg-resolve-test-resolver-biz-garply = "CLOSED"
 LICENSE_${PN}-lib-requireg-resolve = "MIT"
 LICENSE_${PN}-lib-requireg-strip-json-comments = "MIT"
-LICENSE_${PN}-lib-requireg-test-fixtures-lib-beaker = "Unknown"
-LICENSE_${PN}-lib-requireg = "Unknown"
+LICENSE_${PN}-lib-requireg-test-fixtures-lib-beaker = "CLOSED"
+LICENSE_${PN}-lib-requireg = "CLOSED"
 LICENSE_${PN}-lib-resolve = "MIT"
 LICENSE_${PN}-lib-restore-cursor = "MIT"
-LICENSE_${PN}-lib-retry = "Unknown"
+LICENSE_${PN}-lib-retry = "CLOSED"
 LICENSE_${PN}-lib-right-align = "MIT"
 LICENSE_${PN}-lib-rimraf-glob = "ISC"
 LICENSE_${PN}-lib-rimraf = "ISC"
 LICENSE_${PN}-lib-run-async = "MIT"
-LICENSE_${PN}-lib-rx-lite = "Unknown"
+LICENSE_${PN}-lib-rx-lite = "CLOSED"
 LICENSE_${PN}-lib-safe-buffer = "MIT"
 LICENSE_${PN}-lib-semver-diff-semver = "ISC"
 LICENSE_${PN}-lib-semver-diff = "MIT"
-LICENSE_${PN}-lib-semver-utils = "APACHEv2"
+LICENSE_${PN}-lib-semver-utils = "Apache-2.0"
 LICENSE_${PN}-lib-semver = "BSD"
 LICENSE_${PN}-lib-shell-quote = "MIT"
 LICENSE_${PN}-lib-signal-exit = "ISC"
 LICENSE_${PN}-lib-slide = "ISC"
 LICENSE_${PN}-lib-sntp-hoek = "BSD-3-Clause"
-LICENSE_${PN}-lib-sntp = "Unknown"
+LICENSE_${PN}-lib-sntp = "CLOSED"
 LICENSE_${PN}-lib-sort-keys-length = "MIT"
 LICENSE_${PN}-lib-sort-keys = "MIT"
 LICENSE_${PN}-lib-spdx-correct = "Apache-2.0"
 LICENSE_${PN}-lib-spdx-expression-parse = "MIT"
-LICENSE_${PN}-lib-spdx-license-ids = "Unlicense"
+LICENSE_${PN}-lib-spdx-license-ids = "CLOSED"
 LICENSE_${PN}-lib-sshpk = "MIT"
 LICENSE_${PN}-lib-string-decoder = "MIT"
 LICENSE_${PN}-lib-string-width = "MIT"
@@ -671,7 +606,7 @@ LICENSE_${PN}-lib-tar-fs = "MIT"
 LICENSE_${PN}-lib-tar-stream-bl = "MIT"
 LICENSE_${PN}-lib-tar-stream = "MIT"
 LICENSE_${PN}-lib-throttleit = "MIT"
-LICENSE_${PN}-lib-through = "Unknown MIT"
+LICENSE_${PN}-lib-through = "CLOSED MIT"
 LICENSE_${PN}-lib-timed-out = "MIT"
 LICENSE_${PN}-lib-tmp = "MIT"
 LICENSE_${PN}-lib-touch-nopt = "MIT"
@@ -679,7 +614,7 @@ LICENSE_${PN}-lib-touch = "ISC"
 LICENSE_${PN}-lib-traverse = "MIT"
 LICENSE_${PN}-lib-trim-newlines = "MIT"
 LICENSE_${PN}-lib-tunnel-agent = "Apache-2.0"
-LICENSE_${PN}-lib-tweetnacl = "Unlicense"
+LICENSE_${PN}-lib-tweetnacl = "CLOSED"
 LICENSE_${PN}-lib-uglify-js-source-map = "BSD-3-Clause"
 LICENSE_${PN}-lib-uglify-js = "BSD-2-Clause"
 LICENSE_${PN}-lib-uglify-to-browserify = "MIT"
@@ -702,4 +637,4 @@ LICENSE_${PN}-lib-xtend = "MIT"
 LICENSE_${PN}-lib-yargs = "MIT"
 LICENSE_${PN} = "MIT"
 
-
+INSANE_SKIP_${PN} += "license-checksum host-user-contaminated"

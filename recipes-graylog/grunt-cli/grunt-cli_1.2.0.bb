@@ -1,7 +1,3 @@
-# Recipe created by recipetool
-# This is the basis of a recipe and may need further editing in order to be fully functional.
-# (Feel free to remove these comments when editing.)
-
 SUMMARY = "The grunt command line interface"
 # WARNING: the following LICENSE and LIC_FILES_CHKSUM values are best guesses - it is
 # your responsibility to verify that the values are complete and correct.
@@ -18,7 +14,7 @@ SUMMARY = "The grunt command line interface"
 # licenses then you should change the value to separate the licenses with |
 # instead of &. If there is any doubt, check the accompanying documentation
 # to determine which situation is applicable.
-LICENSE = "Unknown & ISC & MIT"
+LICENSE = "CLOSED & ISC & MIT"
 LIC_FILES_CHKSUM = "file://node_modules/findup-sync/LICENSE-MIT;md5=159111132f87941857a4f42d60c880c8 \
                     file://node_modules/findup-sync/node_modules/glob/LICENSE;md5=82703a69f6d7411dde679954c2fd9dca \
                     file://node_modules/findup-sync/node_modules/glob/node_modules/inflight/LICENSE;md5=90a3ca01a5efed8b813a81c6c8fa2e63 \
@@ -39,7 +35,9 @@ SRC_URI = "npm://registry.npmjs.org/;name=grunt-cli;version=${PV}"
 
 NPM_SHRINKWRAP := "${THISDIR}/${PN}/npm-shrinkwrap.json"
 
-inherit npm
+inherit npm license sstate
+
+RDEPENDS_${PN} += "bash zsh"
 
 # Must be set after inherit npm since that itself sets S
 S = "${WORKDIR}/npmpkg"
@@ -57,10 +55,10 @@ LICENSE_${PN}-findup-sync = "MIT"
 LICENSE_${PN}-grunt-known-options = "MIT"
 LICENSE_${PN}-nopt-abbrev = "ISC"
 LICENSE_${PN}-nopt = "ISC"
-LICENSE_${PN}-resolve-test-pathfilter-deep-ref-deep = "Unknown"
-LICENSE_${PN}-resolve-test-resolver-biz-garply = "Unknown"
-LICENSE_${PN}-resolve-test-subdirs-a = "Unknown"
+LICENSE_${PN}-resolve-test-pathfilter-deep-ref-deep = "CLOSED"
+LICENSE_${PN}-resolve-test-resolver-biz-garply = "CLOSED"
+LICENSE_${PN}-resolve-test-subdirs-a = "CLOSED"
 LICENSE_${PN}-resolve = "MIT"
 LICENSE_${PN} = "MIT"
 
-
+INSANE_SKIP_${PN} += "license-checksum host-user-contaminated"
