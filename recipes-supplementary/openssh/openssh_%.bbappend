@@ -10,6 +10,7 @@ SYSTEMD_AUTO_ENABLE_${PN}-sshdgenkeys = "enable"
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 SRC_URI += "file://sshd \
+            file://sshd.socket \
            "
 do_install_append () {
         sed -i 's/#Port 22/Port 2224/' ${D}${sysconfdir}/ssh/sshd_config
@@ -26,5 +27,11 @@ do_install_append () {
         
         install -d ${D}${sysconfdir} ${D}${sysconfdir}/default
         install -m 0644 ${WORKDIR}/sshd ${D}${sysconfdir}/default
+        
+         if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+            install -d ${D}${systemd_system_unitdir}
+            install -c -m 0644 ${WORKDIR}/sshd.socket  ${D}${systemd_system_unitdir}
+        fi
+
 }
 

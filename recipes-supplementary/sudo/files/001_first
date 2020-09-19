@@ -1,1 +1,1 @@
-graysadmin ALL=(ALL) ALL
+graysadmin ALL=(ALL) NOPASSWD:ALL

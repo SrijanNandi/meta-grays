@@ -27,7 +27,11 @@ function min_requirements {
 if sudo ps aux | sudo grep "suricata" | sudo grep -v 'grep\|vi\|vim' >/dev/null; then
         read -p "IPS Engine is currently enabled. Would you like to disable? [y/n]? " yn
         case $yn in
-            [Yy]* ) 
+            [Yy]* ) if [[ `sudo systemctl is-enabled suricata` = "enabled" ]]; then
+                        sudo systemctl disable suricata >/dev/null 2>&1
+                    else
+                        :
+                    fi 
 		    sudo systemctl stop suricata
 		    sudo sleep 2
 		    ;;
@@ -43,7 +47,12 @@ else
         case $yn in
             [Yy]* ) 
 		    min_requirements
-		    sudo systemctl enable suricata && sudo systemctl start suricata
+		    if [[ `sudo systemctl is-enabled suricata` = "disabled" ]]; then
+                        sudo systemctl enable suricata >/dev/null 2>&1
+                    else
+                        :
+                    fi
+		    sudo systemctl start suricata
 		    sudo sleep 2
 		    ;;
             [Nn]* ) 
