@@ -4,7 +4,7 @@ DESCRIPTION = "Secure rlogin/rsh/rcp/telnet replacement (OpenSSH) \
 Ssh (Secure Shell) is a program for logging into a remote machine \
 and for executing commands on a remote machine."
 
-SYSTEMD_AUTO_ENABLE_${PN} = "disable"
+SYSTEMD_AUTO_ENABLE_${PN}-sshd = "disable"
 SYSTEMD_AUTO_ENABLE_${PN}-sshdgenkeys = "enable"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
@@ -31,6 +31,13 @@ do_install_append () {
          if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
             install -d ${D}${systemd_system_unitdir}
             install -c -m 0644 ${WORKDIR}/sshd.socket  ${D}${systemd_system_unitdir}
+            sed -i -e 's,@BASE_BINDIR@,${base_bindir},g' \
+                -e 's,@SBINDIR@,${sbindir},g' \
+                -e 's,@BINDIR@,${bindir},g' \
+                -e 's,@SYSCONFDIR@,${sysconfdir},g' \
+                -e 's,@localstatedir@,${localstatedir},g' \
+                -e 's,@LIBEXECDIR@,${libexecdir}/${BPN},g' \
+                ${D}${systemd_system_unitdir}/sshd.socket
         fi
 
 }
