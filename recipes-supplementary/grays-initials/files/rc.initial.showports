@@ -4,8 +4,6 @@ INT_NAME=`/sbin/ip link | /usr/bin/awk -F: '$0 !~ "lo|vir|wl|sit|^[^0-9]"{print 
 
 declare -a array=($(echo "$INT_NAME"))
 
-echo ${#array[@]}
-echo $array
 function interface_spec() {
 	for ((i=0; i<${#array[@]}; i+=1)); do
 		MAC_ADDR=`/bin/cat /sys/class/net/${array[$i]}/address`

@@ -383,9 +383,6 @@ threading:
     - detect-cpu-set:
         cpu: [ "all" ]
         mode: "exclusive" # run detect threads in these cpus
-        # Use explicitely 3 threads and don't compute number by using
-        # detect-thread-ratio variable:
-        # threads: 3
         prio:
           low: [ 0 ]
           medium: [ "1-2" ]
@@ -403,6 +400,15 @@ threading:
         cpu: [ "all" ]
         prio:
            default: "medium"
+    - worker-cpu-set:
+        cpu: [ "all" ]
+        mode: "exclusive"
+        prio:
+          low: [ 0 ]
+          medium: [ 1 ]
+          high: [ "2-3" ]
+          default: "high"
+
   #
   # By default Suricata creates one "detect" thread per available CPU/CPU core.
   # This setting allows controlling this behaviour. A ratio setting of 2 will
