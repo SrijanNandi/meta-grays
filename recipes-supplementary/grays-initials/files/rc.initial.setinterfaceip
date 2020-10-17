@@ -23,7 +23,7 @@ function wan_interface_file() {
 	echo -e "1) Static"
 	echo -e "2) Dynamic (DHCP)"
 	echo -e "3) None"
-	read -p "Enter the number for the onfiguration type on WAN: " CONF_TYPE
+	read -p "Enter the number for the configuration type on WAN: " CONF_TYPE
 	case $CONF_TYPE in
 		[1]* )
 			read -p "Enter the WAN IP Address with subnet mask: " WAN_IP

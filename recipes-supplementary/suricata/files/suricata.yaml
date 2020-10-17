@@ -399,7 +399,7 @@ threading:
     - output-cpu-set:
         cpu: [ "all" ]
         prio:
-           default: "medium"
+          default: "medium"
     - worker-cpu-set:
         cpu: [ "all" ]
         mode: "exclusive"
