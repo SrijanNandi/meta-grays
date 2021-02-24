@@ -7,25 +7,25 @@ COMPATIBLE_HOST_armv7a = "^$"
 COMPATIBLE_HOST_armv7ve = "^$"
 
 CORBA_CHANGESET = "jdk8u${PV}-ga"
-SRC_URI[corba.sha256sum] = "97513397015ca62953c6afa3ba925b1dabc0238d47f3a2b81c2bd5b683d4d050"
+SRC_URI[corba.sha256sum] = "51212e37b6c6e120901e61b830f110bbd121e9c4611aec9ff4e3f404a667855f"
 
 HOTSPOT_CHANGESET = "jdk8u${PV}-ga"
-SRC_URI[hotspot.sha256sum] = "80a91f421bbe750f5e8c66b74f77fb79f31cce2f6e9e1cfe8407d773bb1ed57d"
+SRC_URI[hotspot.sha256sum] = "a8c83dcd272dc29c538291f24d1b28b7069e048398681b6db082cdaa8f3a6b07"
 
 JAXP_CHANGESET = "jdk8u${PV}-ga"
-SRC_URI[jaxp.sha256sum] = "ead123b56c1c5d4c381665da6c0858cd9b11c69b8afc7494f9831980bc71bc92"
+SRC_URI[jaxp.sha256sum] = "3f8b02337f4cd96e9180aa118705f48c39562f66287b46dd69554221fa196084"
 
 JAXWS_CHANGESET = "jdk8u${PV}-ga"
-SRC_URI[jaxws.sha256sum] = "ef6532ac77e7e4333283c09c87b6923fbaa91b8bca6770f06494c3bb1643455e"
+SRC_URI[jaxws.sha256sum] = "ed276f9a70bf2582183838ad8b1874c0993b4a28741c69f095669667b12cd3d4"
 
 JDK_CHANGESET = "jdk8u${PV}-ga"
-SRC_URI[jdk.sha256sum] = "7203ded24a10843ac8e84269ad8ac347f29b1dd950f7e0bb9739ddcb8280b8fb"
+SRC_URI[jdk.sha256sum] = "a3deeab4ac721d1ce9d8a2fb1917ba9e2afc6041f03ad4a342e9a5441cce621d"
 
 LANGTOOLS_CHANGESET = "jdk8u${PV}-ga"
-SRC_URI[langtools.sha256sum] = "6e2329e3f15c0fd23da47cd8f454cb49cdae0b12c951eb2910061fa95acb8ea4"
+SRC_URI[langtools.sha256sum] = "ed59eabe4eb3fcf9af592d1af2d052c5053da9d868542fc47a0bddcb91e69c60"
 
 NASHORN_CHANGESET = "jdk8u${PV}-ga"
-SRC_URI[nashorn.sha256sum] = "195237fd89f34c27bf98c3a8bfda64bbc799a014e83907062a8b4e10bd4f2021"
+SRC_URI[nashorn.sha256sum] = "a5b8c478cd7695bf83210b8e97be3bfc8248c22916cec3b8b869586c3d7f0007"
 
 OPENJDK_CHANGESET = "jdk8u${PV}-ga"
-SRC_URI[openjdk.sha256sum] = "a83f8daa2afece63bf7ae95cfbca91ef765424c40b9f5b45e4a3c2d4da0f7a95"
+SRC_URI[openjdk.sha256sum] = "a80476dfe32c12882fe2d87bdb0dd37fc4a0dae8dd95f0c22c7c2445fc08ff7e"

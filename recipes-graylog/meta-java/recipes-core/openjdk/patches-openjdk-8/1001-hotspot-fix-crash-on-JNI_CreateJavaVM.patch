@@ -1,7 +1,7 @@
-From 5e8080a8dd56205f550f7c490f864c95dc8e509b Mon Sep 17 00:00:00 2001
+From 4d1bd6a65c52564f32761217ded7b9bdde43556b Mon Sep 17 00:00:00 2001
 From: Wenlin Kang <wenlin.kang@windriver.com>
 Date: Sun, 17 Feb 2019 22:38:33 -0800
-Subject: [PATCH 1001/1012] hotspot: fix crash on JNI_CreateJavaVM
+Subject: [PATCH 1001/1013] hotspot: fix crash on JNI_CreateJavaVM
 
 In function os::pd_create_stack_guard_pages(char* addr, size_t size),
 when addr < os::Linux::initial_thread_stack_bottom(), usually munmap()
@@ -19,10 +19,10 @@ Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/hotspot/src/os/linux/vm/os_linux.cpp b/hotspot/src/os/linux/vm/os_linux.cpp
-index 03cabfefb..4f28cc1fb 100644
+index c477851c1..47eef1e7c 100644
 --- a/hotspot/src/os/linux/vm/os_linux.cpp
 +++ b/hotspot/src/os/linux/vm/os_linux.cpp
-@@ -3192,7 +3192,8 @@ bool os::pd_create_stack_guard_pages(char* addr, size_t size) {
+@@ -3227,7 +3227,8 @@ bool os::pd_create_stack_guard_pages(char* addr, size_t size) {
      uintptr_t stack_extent = (uintptr_t) os::Linux::initial_thread_stack_bottom();
      unsigned char vec[1];
  
@@ -33,5 +33,5 @@ index 03cabfefb..4f28cc1fb 100644
        stack_extent = (uintptr_t) get_stack_commited_bottom(
                                      os::Linux::initial_thread_stack_bottom(),
 -- 
-2.24.1
+2.26.2
 

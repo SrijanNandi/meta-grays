@@ -18,6 +18,7 @@ USERADD_PARAM_${PN} = " \
 
 SYSTEMD_SERVICE_${PN} = "mongod.service"
 SYSTEMD_AUTO_ENABLE = "enable"
+INSANE_SKIP_${PN} += "already-stripped ldflags installed-vs-shipped host-user-contaminated"
 
 do_install_append() {
         install -d ${D}${sysconfdir}

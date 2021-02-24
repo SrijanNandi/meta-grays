@@ -8,8 +8,8 @@ DEPENDS = "\
 "
 
 PACKAGECONFIG ??= "gif jpeg png zlib"
-PACKAGECONFIG[x11] = "--with-x,,libx11-native xorgproto-native libxt-native libxext-native libxrender-native"
-PACKAGECONFIG[cups] = "--with-cups,,cups"
+PACKAGECONFIG[x11] = "--with-x,,libx11-native xorgproto-native libxt-native libxext-native libxrender-native libxtst-native"
+PACKAGECONFIG[cups] = "--with-cups,,cups-native"
 PACKAGECONFIG[alsa] = "--with-alsa,,alsa-lib-native"
 PACKAGECONFIG[gif] = "--with-giflib=system,--with-giflib=bundled,giflib-native"
 PACKAGECONFIG[jce] = "--enable-unlimited-crypto,,"
@@ -88,3 +88,6 @@ do_install() {
         ln -sf "../lib/jvm/${JDK_DIR}/bin/$tool" ${D}${bindir}/$tool
     done
 }
+
+# FIXME libfreetype.so.6 is copied from STAGING_LIBDIR which is already stripped
+INSANE_SKIP_${PN} = "already-stripped"

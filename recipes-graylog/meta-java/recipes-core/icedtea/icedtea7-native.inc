@@ -28,6 +28,14 @@ CXX_append = " -std=gnu++98"
 # WORKAROUND: ignore errors from new compilers
 CFLAGS_append = " -Wno-error=stringop-overflow -Wno-error=return-type"
 
+# oe.utils.get_host_compiler_version returns "gcc, 9.2" and we want -> "9"
+HOST_COMPILER_MAJOR="${@oe.utils.get_host_compiler_version(d)[1].split(".", 2)[0]}"
+# if compiler version 9 detected, add more CFLAGS
+CFLAGS_append = " ${@oe.utils.conditional('HOST_COMPILER_MAJOR', '9', '-Wno-error=format-overflow', '', d)}"
+
+# Explicitly pass -fcommon since GCC 10 defaults to -fno-common for C sources
+CFLAGS_append = " -fcommon"
+
 inherit native java autotools pkgconfig
 inherit openjdk-build-helper
 inherit python3native
@@ -58,37 +66,35 @@ B = "${S}/build"
 # openjdk looks in /usr/include and /usr/lib for freetype by default.
 export ALT_FREETYPE_HEADERS_PATH = "${STAGING_INCDIR}/freetype2"
 export ALT_FREETYPE_LIB_PATH = "${STAGING_LIBDIR}"
+export ALT_CUPS_HEADERS_PATH = "${STAGING_INCDIR}"
 
 # libfreetype.so.6 is copied from STAGING_LIBDIR
 # which is already stripped.
 INSANE_SKIP_${PN} = "already-stripped"
 
 EXTRA_OECONF = "\
-	--with-parallel-jobs=${@openjdk_build_helper_get_parallel_make(d)} \
-	\
-        --disable-tests \
-        --disable-hotspot-tests \
-        --disable-langtools-tests \
-        --disable-jdk-tests \
-        --disable-pulse-java \
-        --disable-docs \
-        --disable-nss \
-        --disable-system-lcms \
-	--disable-system-gtk \
-	\
-	--with-jdk-home=${WORKDIR}/fake-jdk \
-	--with-javac=${STAGING_BINDIR_NATIVE}/javac \
-	--with-rhino=${STAGING_DATADIR_NATIVE}/java/rhino.jar \
-	\
-	--with-openjdk-src-zip=${DL_DIR}/${OPENJDK_FILE} \
-        --with-hotspot-src-zip=${DL_DIR}/${HOTSPOT_FILE} \
-        --with-corba-src-zip=${DL_DIR}/${CORBA_FILE} \
-        --with-jaxp-src-zip=${DL_DIR}/${JAXP_FILE} \
-        --with-jaxws-src-zip=${DL_DIR}/${JAXWS_FILE} \
-        --with-jdk-src-zip=${DL_DIR}/${JDK_FILE} \
-        --with-langtools-src-zip=${DL_DIR}/${LANGTOOLS_FILE} \
-        ac_cv_path_UNZIP_BIN="${STAGING_BINDIR_NATIVE}/unzip" \
-  "
+    --with-parallel-jobs=${@openjdk_build_helper_get_parallel_make(d)} \
+    --disable-tests \
+    --disable-hotspot-tests \
+    --disable-langtools-tests \
+    --disable-jdk-tests \
+    --disable-pulse-java \
+    --disable-docs \
+    --disable-nss \
+    --disable-system-lcms \
+    --disable-system-gtk \
+    --with-jdk-home=${WORKDIR}/fake-jdk \
+    --with-javac=${STAGING_BINDIR_NATIVE}/javac \
+    --with-rhino=${STAGING_DATADIR_NATIVE}/java/rhino.jar \
+    --with-openjdk-src-zip=${DL_DIR}/${OPENJDK_FILE_DOWNLOAD} \
+    --with-hotspot-src-zip=${DL_DIR}/${HOTSPOT_FILE_DOWNLOAD} \
+    --with-corba-src-zip=${DL_DIR}/${CORBA_FILE_DOWNLOAD} \
+    --with-jaxp-src-zip=${DL_DIR}/${JAXP_FILE_DOWNLOAD} \
+    --with-jaxws-src-zip=${DL_DIR}/${JAXWS_FILE_DOWNLOAD} \
+    --with-jdk-src-zip=${DL_DIR}/${JDK_FILE_DOWNLOAD} \
+    --with-langtools-src-zip=${DL_DIR}/${LANGTOOLS_FILE_DOWNLOAD} \
+    ac_cv_path_UNZIP_BIN="${STAGING_BINDIR_NATIVE}/unzip" \
+"
 
 JDK_DIR = "icedtea7-native"
 

@@ -1,7 +1,75 @@
+# Recipe created by recipetool
+# This is the basis of a recipe and may need further editing in order to be fully functional.
+# (Feel free to remove these comments when editing.)
+
 SUMMARY = "The browser package manager"
 HOMEPAGE = "http://bower.io"
 # WARNING: the following LICENSE and LIC_FILES_CHKSUM values are best guesses - it is
 # your responsibility to verify that the values are complete and correct.
+#
+# The following license files were not able to be identified and are
+# represented as "Unknown" below, you will need to check them yourself:
+#   lib/node_modules/jsbn/LICENSE
+#   lib/node_modules/requireg/LICENSE
+#   lib/node_modules/requireg/node_modules/rc/LICENSE.BSD
+#   lib/node_modules/requireg/node_modules/rc/LICENSE.APACHE2
+#   lib/node_modules/tunnel-agent/LICENSE
+#   lib/node_modules/cardinal/LICENSE
+#   lib/node_modules/oauth-sign/LICENSE
+#   lib/node_modules/inquirer/node_modules/lodash/LICENSE
+#   lib/node_modules/rc/LICENSE.BSD
+#   lib/node_modules/rc/LICENSE.APACHE2
+#   lib/node_modules/dashdash/LICENSE.txt
+#   lib/node_modules/spdx-license-ids/LICENSE
+#   lib/node_modules/spdx-license-ids/spdx-license-ids.json
+#   lib/node_modules/boom/LICENSE
+#   lib/node_modules/boom/node_modules/hoek/LICENSE
+#   lib/node_modules/retry/License
+#   lib/node_modules/process-nextick-args/license.md
+#   lib/node_modules/bower-registry-client/node_modules/qs/LICENSE
+#   lib/node_modules/bower-registry-client/node_modules/tunnel-agent/LICENSE
+#   lib/node_modules/bower-registry-client/node_modules/tough-cookie/LICENSE
+#   lib/node_modules/bower-registry-client/node_modules/caseless/LICENSE
+#   lib/node_modules/bower-registry-client/node_modules/request/LICENSE
+#   lib/node_modules/amdefine/LICENSE
+#   lib/node_modules/spdx-correct/LICENSE
+#   lib/node_modules/semver/LICENSE
+#   lib/node_modules/ansicolors/LICENSE
+#   lib/node_modules/verror/LICENSE
+#   lib/node_modules/hawk/LICENSE
+#   lib/node_modules/hawk/node_modules/hoek/LICENSE
+#   lib/node_modules/jsprim/LICENSE
+#   lib/node_modules/uglify-js/LICENSE
+#   lib/node_modules/uglify-js/node_modules/source-map/LICENSE
+#   lib/node_modules/normalize-package-data/LICENSE
+#   lib/node_modules/redeyed/LICENSE
+#   lib/node_modules/caseless/LICENSE
+#   lib/node_modules/through/LICENSE.APACHE2
+#   lib/node_modules/sntp/LICENSE
+#   lib/node_modules/sntp/node_modules/hoek/LICENSE
+#   lib/node_modules/readable-stream/LICENSE
+#   lib/node_modules/readable-stream/node_modules/string_decoder/LICENSE
+#   lib/node_modules/configstore/node_modules/uuid/LICENSE.md
+#   lib/node_modules/isstream/LICENSE.md
+#   lib/node_modules/tar-stream/node_modules/bl/LICENSE.md
+#   lib/node_modules/cryptiles/LICENSE
+#   lib/node_modules/ecc-jsbn/lib/LICENSE-jsbn
+#   lib/node_modules/touch/node_modules/nopt/LICENSE
+#   lib/node_modules/request/LICENSE
+#   lib/node_modules/request/node_modules/qs/LICENSE
+#   lib/node_modules/request/node_modules/tough-cookie/LICENSE
+#   lib/node_modules/bl/LICENSE.md
+#   lib/node_modules/tweetnacl/LICENSE
+#   lib/node_modules/extsprintf/LICENSE
+#   lib/node_modules/asn1/LICENSE
+#   lib/node_modules/traverse/LICENSE
+#   lib/node_modules/fs.realpath/LICENSE
+#   lib/node_modules/validate-npm-package-license/LICENSE
+#   lib/node_modules/forever-agent/LICENSE
+#   lib/node_modules/aws-sign2/LICENSE
+#   lib/node_modules/lodash/LICENSE
+#   lib/node_modules/duplexer2/LICENSE.md
+#   lib/node_modules/balanced-match/LICENSE.md
 #
 # NOTE: multiple licenses have been detected; they have been separated with &
 # in the LICENSE value for now since it is a reasonable assumption that all
@@ -9,8 +77,7 @@ HOMEPAGE = "http://bower.io"
 # licenses then you should change the value to separate the licenses with |
 # instead of &. If there is any doubt, check the accompanying documentation
 # to determine which situation is applicable.
-LICENSE = "BSD & PD & BSD-2-Clause & Apache-2.0 & \
-(BSD-3-Clause | MIT) & ISC & CLOSED & BSD-3-Clause & MIT"
+LICENSE = "MIT & CLOSED & ISC"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b9d0f27ea752b176045383eb2d1f3ce0 \
                     file://lib/node_modules/lazy-cache/LICENSE;md5=a0bd3ad96ad6f399ce73b75ce8332105 \
                     file://lib/node_modules/pump/LICENSE;md5=9befe7026bf915886cd566a98117c80e \
@@ -302,339 +369,22 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b9d0f27ea752b176045383eb2d1f3ce0 \
                     file://lib/node_modules/error-ex/LICENSE;md5=e67c75e89656b80fd99cb7d30fb43102 \
                     file://lib/node_modules/path-type/license;md5=a12ebca0510a773644101a99a867d210 \
                     file://lib/node_modules/ansi-regex/license;md5=a12ebca0510a773644101a99a867d210 \
-                    file://lib/node_modules/escape-string-regexp/license;md5=a12ebca0510a773644101a99a867d210"
+                    file://lib/node_modules/escape-string-regexp/license;md5=a12ebca0510a773644101a99a867d210 \
+                    file://package.json;md5=e9ca38b6e053eb906aa4e59dc2c9860c"
 
-SRC_URI = "npm://registry.npmjs.org/;name=bower;version=${PV}"
-
+SRC_URI = " \
+    npm://registry.npmjs.org/;package=bower;version=${PV} \
+    "
 NPM_SHRINKWRAP := "${THISDIR}/${PN}/npm-shrinkwrap.json"
+
+S = "${WORKDIR}/npm"
 
 inherit npm license sstate
 
 RDEPENDS_${PN} += "bash"
 RDEPENDS_${PN}-lib-node-uuid += "bash"
 
-# Must be set after inherit npm since that itself sets S
-S = "${WORKDIR}/npmpkg"
-LICENSE_${PN}-lib-abbrev = "ISC"
-LICENSE_${PN}-lib-ajv = "MIT"
-LICENSE_${PN}-lib-align-text = "MIT"
-LICENSE_${PN}-lib-amdefine = "BSD-3-Clause"
-LICENSE_${PN}-lib-ansi-escapes = "MIT"
-LICENSE_${PN}-lib-ansi-regex = "MIT"
-LICENSE_${PN}-lib-ansicolors = "MIT"
-LICENSE_${PN}-lib-archy = "MIT"
-LICENSE_${PN}-lib-array-filter = "MIT"
-LICENSE_${PN}-lib-array-find-index = "MIT"
-LICENSE_${PN}-lib-array-map = "MIT"
-LICENSE_${PN}-lib-array-reduce = "MIT"
-LICENSE_${PN}-lib-asn1 = "MIT"
-LICENSE_${PN}-lib-assert-plus = "MIT"
-LICENSE_${PN}-lib-asynckit = "MIT"
-LICENSE_${PN}-lib-async = "MIT"
-LICENSE_${PN}-lib-aws-sign2 = "Apache-2.0"
-LICENSE_${PN}-lib-aws4 = "MIT"
-LICENSE_${PN}-lib-balanced-match = "MIT"
-LICENSE_${PN}-lib-bcrypt-pbkdf = "BSD-3-Clause"
-LICENSE_${PN}-lib-binary = "MIT"
-LICENSE_${PN}-lib-bl-readable-stream = "MIT"
-LICENSE_${PN}-lib-bl = "MIT"
-LICENSE_${PN}-lib-boom-hoek = "BSD-3-Clause"
-LICENSE_${PN}-lib-boom = "BSD-3-Clause"
-LICENSE_${PN}-lib-bower-config-mout = "MIT"
-LICENSE_${PN}-lib-bower-config = "MIT"
-LICENSE_${PN}-lib-bower-endpoint-parser = "MIT"
-LICENSE_${PN}-lib-bower-json = "MIT"
-LICENSE_${PN}-lib-bower-logger = "MIT"
-LICENSE_${PN}-lib-bower-registry-client-async = "MIT"
-LICENSE_${PN}-lib-bower-registry-client-caseless = "Apache-2.0"
-LICENSE_${PN}-lib-bower-registry-client-har-validator = "ISC"
-LICENSE_${PN}-lib-bower-registry-client-mkdirp = "MIT"
-LICENSE_${PN}-lib-bower-registry-client-qs = "BSD-3-Clause"
-LICENSE_${PN}-lib-bower-registry-client-request = "Apache-2.0"
-LICENSE_${PN}-lib-bower-registry-client-tough-cookie = "BSD-3-Clause"
-LICENSE_${PN}-lib-bower-registry-client-tunnel-agent = "Apache-2.0"
-LICENSE_${PN}-lib-bower-registry-client = "MIT"
-LICENSE_${PN}-lib-boxen = "MIT"
-LICENSE_${PN}-lib-brace-expansion = "MIT"
-LICENSE_${PN}-lib-buffers = "CLOSED"
-LICENSE_${PN}-lib-builtin-modules = "MIT"
-LICENSE_${PN}-lib-camelcase-keys-camelcase = "MIT"
-LICENSE_${PN}-lib-camelcase-keys = "MIT"
-LICENSE_${PN}-lib-camelcase = "MIT"
-LICENSE_${PN}-lib-capture-stack-trace = "MIT"
-LICENSE_${PN}-lib-cardinal = "MIT"
-LICENSE_${PN}-lib-caseless = "Apache-2.0"
-LICENSE_${PN}-lib-center-align = "MIT"
-LICENSE_${PN}-lib-chainsaw = "MIT"
-LICENSE_${PN}-lib-chalk-ansi-styles = "MIT"
-LICENSE_${PN}-lib-chalk-supports-color = "MIT"
-LICENSE_${PN}-lib-chalk = "MIT"
-LICENSE_${PN}-lib-chmodr = "ISC"
-LICENSE_${PN}-lib-chownr = "ISC"
-LICENSE_${PN}-lib-cli-cursor = "MIT"
-LICENSE_${PN}-lib-cli-width = "ISC"
-LICENSE_${PN}-lib-cliui-wordwrap = "MIT"
-LICENSE_${PN}-lib-cliui = "ISC"
-LICENSE_${PN}-lib-code-point-at = "MIT"
-LICENSE_${PN}-lib-combined-stream = "MIT"
-LICENSE_${PN}-lib-commander = "MIT"
-LICENSE_${PN}-lib-concat-map = "MIT"
-LICENSE_${PN}-lib-configstore-minimist = "MIT"
-LICENSE_${PN}-lib-configstore-mkdirp = "MIT"
-LICENSE_${PN}-lib-configstore-uuid = "MIT"
-LICENSE_${PN}-lib-configstore = "BSD-2-Clause"
-LICENSE_${PN}-lib-core-util-is = "MIT"
-LICENSE_${PN}-lib-co = "MIT"
-LICENSE_${PN}-lib-create-error-class = "MIT"
-LICENSE_${PN}-lib-cryptiles = "BSD-3-Clause"
-LICENSE_${PN}-lib-currently-unhandled = "MIT"
-LICENSE_${PN}-lib-dashdash = "MIT"
-LICENSE_${PN}-lib-decamelize = "MIT"
-LICENSE_${PN}-lib-decompress-zip-isarray = "MIT"
-LICENSE_${PN}-lib-decompress-zip-readable-stream = "MIT"
-LICENSE_${PN}-lib-decompress-zip = "MIT"
-LICENSE_${PN}-lib-deep-extend = "MIT"
-LICENSE_${PN}-lib-delayed-stream = "MIT"
-LICENSE_${PN}-lib-destroy = "MIT"
-LICENSE_${PN}-lib-dot-prop = "MIT"
-LICENSE_${PN}-lib-duplexer2 = "BSD-3-Clause"
-LICENSE_${PN}-lib-ecc-jsbn = "CLOSED MIT"
-LICENSE_${PN}-lib-end-of-stream = "MIT"
-LICENSE_${PN}-lib-ends-with = "MIT"
-LICENSE_${PN}-lib-error-ex = "MIT"
-LICENSE_${PN}-lib-escape-string-regexp = "MIT"
-LICENSE_${PN}-lib-exit-hook = "MIT"
-LICENSE_${PN}-lib-ext-list = "MIT"
-LICENSE_${PN}-lib-ext-name = "MIT"
-LICENSE_${PN}-lib-extend = "MIT"
-LICENSE_${PN}-lib-extsprintf = "MIT"
-LICENSE_${PN}-lib-figures = "MIT"
-LICENSE_${PN}-lib-filled-array = "MIT"
-LICENSE_${PN}-lib-find-up = "MIT"
-LICENSE_${PN}-lib-findup-sync-glob = "ISC"
-LICENSE_${PN}-lib-findup-sync = "MIT"
-LICENSE_${PN}-lib-forever-agent = "Apache-2.0"
-LICENSE_${PN}-lib-form-data = "MIT"
-LICENSE_${PN}-lib-fs-write-stream-atomic = "ISC"
-LICENSE_${PN}-lib-fs.realpath = "ISC"
-LICENSE_${PN}-lib-fstream-ignore = "ISC"
-LICENSE_${PN}-lib-fstream-minimist = "MIT"
-LICENSE_${PN}-lib-fstream-mkdirp = "MIT"
-LICENSE_${PN}-lib-fstream = "ISC"
-LICENSE_${PN}-lib-generate-function = "MIT"
-LICENSE_${PN}-lib-generate-object-property = "MIT"
-LICENSE_${PN}-lib-get-stdin = "MIT"
-LICENSE_${PN}-lib-getpass = "MIT"
-LICENSE_${PN}-lib-github = "MIT"
-LICENSE_${PN}-lib-glob-minimatch = "ISC"
-LICENSE_${PN}-lib-glob = "ISC"
-LICENSE_${PN}-lib-got = "MIT"
-LICENSE_${PN}-lib-graceful-fs = "ISC"
-LICENSE_${PN}-lib-handlebars-source-map = "BSD-3-Clause"
-LICENSE_${PN}-lib-handlebars = "MIT"
-LICENSE_${PN}-lib-har-schema = "ISC"
-LICENSE_${PN}-lib-har-validator = "ISC"
-LICENSE_${PN}-lib-has-ansi = "MIT"
-LICENSE_${PN}-lib-hawk-hoek = "BSD-3-Clause"
-LICENSE_${PN}-lib-hawk = "BSD-3-Clause"
-LICENSE_${PN}-lib-hosted-git-info = "ISC"
-LICENSE_${PN}-lib-http-signature-assert-plus = "MIT"
-LICENSE_${PN}-lib-http-signature = "MIT"
-LICENSE_${PN}-lib-iferr = "MIT"
-LICENSE_${PN}-lib-imurmurhash = "MIT"
-LICENSE_${PN}-lib-indent-string = "MIT"
-LICENSE_${PN}-lib-inflight = "ISC"
-LICENSE_${PN}-lib-inherits = "ISC"
-LICENSE_${PN}-lib-ini = "ISC"
-LICENSE_${PN}-lib-inquirer-lodash = "MIT"
-LICENSE_${PN}-lib-inquirer = "MIT"
-LICENSE_${PN}-lib-intersect = "MIT"
-LICENSE_${PN}-lib-is-arrayish = "MIT"
-LICENSE_${PN}-lib-is-buffer = "MIT"
-LICENSE_${PN}-lib-is-builtin-module = "MIT"
-LICENSE_${PN}-lib-is-finite = "MIT"
-LICENSE_${PN}-lib-is-fullwidth-code-point = "MIT"
-LICENSE_${PN}-lib-is-my-json-valid = "MIT"
-LICENSE_${PN}-lib-is-npm = "MIT"
-LICENSE_${PN}-lib-is-obj = "MIT"
-LICENSE_${PN}-lib-is-plain-obj = "MIT"
-LICENSE_${PN}-lib-is-property = "MIT"
-LICENSE_${PN}-lib-is-redirect = "MIT"
-LICENSE_${PN}-lib-is-retry-allowed = "MIT"
-LICENSE_${PN}-lib-is-root = "MIT"
-LICENSE_${PN}-lib-is-stream = "MIT"
-LICENSE_${PN}-lib-is-typedarray = "MIT"
-LICENSE_${PN}-lib-is-utf8 = "MIT"
-LICENSE_${PN}-lib-isarray = "MIT"
-LICENSE_${PN}-lib-isexe = "ISC"
-LICENSE_${PN}-lib-isstream = "MIT"
-LICENSE_${PN}-lib-jsbn = "MIT"
-LICENSE_${PN}-lib-json-schema = "CLOSED"
-LICENSE_${PN}-lib-json-stable-stringify = "MIT"
-LICENSE_${PN}-lib-json-stringify-safe = "ISC"
-LICENSE_${PN}-lib-jsonify = "PD"
-LICENSE_${PN}-lib-jsonpointer = "MIT"
-LICENSE_${PN}-lib-jsprim = "MIT"
-LICENSE_${PN}-lib-junk = "MIT"
-LICENSE_${PN}-lib-kind-of = "MIT"
-LICENSE_${PN}-lib-latest-version = "MIT"
-LICENSE_${PN}-lib-lazy-cache = "MIT"
-LICENSE_${PN}-lib-load-json-file = "MIT"
-LICENSE_${PN}-lib-lockfile = "ISC"
-LICENSE_${PN}-lib-lodash = "MIT"
-LICENSE_${PN}-lib-longest = "MIT"
-LICENSE_${PN}-lib-loud-rejection = "MIT"
-LICENSE_${PN}-lib-lowercase-keys = "MIT"
-LICENSE_${PN}-lib-lru-cache = "ISC"
-LICENSE_${PN}-lib-map-obj = "MIT"
-LICENSE_${PN}-lib-md5-hex = "MIT"
-LICENSE_${PN}-lib-md5-o-matic = "MIT"
-LICENSE_${PN}-lib-meow = "MIT"
-LICENSE_${PN}-lib-mime-db = "MIT"
-LICENSE_${PN}-lib-mime-types = "MIT"
-LICENSE_${PN}-lib-mime = "MIT"
-LICENSE_${PN}-lib-minimatch = "ISC"
-LICENSE_${PN}-lib-minimist = "MIT"
-LICENSE_${PN}-lib-mkdirp-minimist = "MIT"
-LICENSE_${PN}-lib-mkdirp = "MIT"
-LICENSE_${PN}-lib-mkpath = "MIT"
-LICENSE_${PN}-lib-mout = "MIT"
-LICENSE_${PN}-lib-mute-stream = "ISC"
-LICENSE_${PN}-lib-nested-error-stacks = "MIT"
-LICENSE_${PN}-lib-node-status-codes = "MIT"
-LICENSE_${PN}-lib-node-uuid = "MIT"
-LICENSE_${PN}-lib-nopt = "ISC"
-LICENSE_${PN}-lib-normalize-package-data-semver = "ISC"
-LICENSE_${PN}-lib-normalize-package-data = "BSD-2-Clause"
-LICENSE_${PN}-lib-number-is-nan = "MIT"
-LICENSE_${PN}-lib-oauth-sign = "Apache-2.0"
-LICENSE_${PN}-lib-object-assign = "MIT"
-LICENSE_${PN}-lib-once = "ISC"
-LICENSE_${PN}-lib-onetime = "MIT"
-LICENSE_${PN}-lib-opn = "MIT"
-LICENSE_${PN}-lib-optimist-minimist = "MIT"
-LICENSE_${PN}-lib-optimist-wordwrap = "MIT"
-LICENSE_${PN}-lib-optimist = "MIT"
-LICENSE_${PN}-lib-os-homedir = "MIT"
-LICENSE_${PN}-lib-os-tmpdir = "MIT"
-LICENSE_${PN}-lib-osenv = "ISC"
-LICENSE_${PN}-lib-p-throttler-q = "MIT"
-LICENSE_${PN}-lib-p-throttler = "MIT"
-LICENSE_${PN}-lib-package-json-semver = "ISC"
-LICENSE_${PN}-lib-package-json = "MIT"
-LICENSE_${PN}-lib-parse-json = "MIT"
-LICENSE_${PN}-lib-path-exists = "MIT"
-LICENSE_${PN}-lib-path-is-absolute = "MIT"
-LICENSE_${PN}-lib-path-parse = "MIT"
-LICENSE_${PN}-lib-path-type = "MIT"
-LICENSE_${PN}-lib-performance-now = "MIT"
-LICENSE_${PN}-lib-pify = "MIT"
-LICENSE_${PN}-lib-pinkie-promise = "MIT"
-LICENSE_${PN}-lib-pinkie = "MIT"
-LICENSE_${PN}-lib-prepend-http = "MIT"
-LICENSE_${PN}-lib-process-nextick-args = "MIT"
-LICENSE_${PN}-lib-promptly = "MIT"
-LICENSE_${PN}-lib-pump = "MIT"
-LICENSE_${PN}-lib-punycode = "MIT"
-LICENSE_${PN}-lib-q = "MIT"
-LICENSE_${PN}-lib-rc = "CLOSED MIT"
-LICENSE_${PN}-lib-read-all-stream = "MIT"
-LICENSE_${PN}-lib-read-mute-stream = "ISC"
-LICENSE_${PN}-lib-read-pkg-up = "MIT"
-LICENSE_${PN}-lib-read-pkg = "MIT"
-LICENSE_${PN}-lib-readable-stream-string-decoder = "MIT"
-LICENSE_${PN}-lib-readable-stream = "MIT"
-LICENSE_${PN}-lib-readline2 = "MIT"
-LICENSE_${PN}-lib-read = "ISC"
-LICENSE_${PN}-lib-redent = "MIT"
-LICENSE_${PN}-lib-redeyed-esprima = "CLOSED"
-LICENSE_${PN}-lib-redeyed = "MIT"
-LICENSE_${PN}-lib-registry-auth-token = "MIT"
-LICENSE_${PN}-lib-registry-url = "MIT"
-LICENSE_${PN}-lib-repeat-string = "MIT"
-LICENSE_${PN}-lib-repeating = "MIT"
-LICENSE_${PN}-lib-request-async = "MIT"
-LICENSE_${PN}-lib-request-form-data = "MIT"
-LICENSE_${PN}-lib-request-progress = "MIT"
-LICENSE_${PN}-lib-request-qs = "BSD-3-Clause"
-LICENSE_${PN}-lib-request-replay = "MIT"
-LICENSE_${PN}-lib-request-tough-cookie = "BSD-3-Clause"
-LICENSE_${PN}-lib-request = "Apache-2.0"
-LICENSE_${PN}-lib-requireg-deep-extend = "MIT"
-LICENSE_${PN}-lib-requireg-minimist = "MIT"
-LICENSE_${PN}-lib-requireg-rc = "CLOSED MIT"
-LICENSE_${PN}-lib-requireg-resolve-test-resolver-biz-garply = "CLOSED"
-LICENSE_${PN}-lib-requireg-resolve = "MIT"
-LICENSE_${PN}-lib-requireg-strip-json-comments = "MIT"
-LICENSE_${PN}-lib-requireg-test-fixtures-lib-beaker = "CLOSED"
-LICENSE_${PN}-lib-requireg = "CLOSED"
-LICENSE_${PN}-lib-resolve = "MIT"
-LICENSE_${PN}-lib-restore-cursor = "MIT"
-LICENSE_${PN}-lib-retry = "CLOSED"
-LICENSE_${PN}-lib-right-align = "MIT"
-LICENSE_${PN}-lib-rimraf-glob = "ISC"
-LICENSE_${PN}-lib-rimraf = "ISC"
-LICENSE_${PN}-lib-run-async = "MIT"
-LICENSE_${PN}-lib-rx-lite = "CLOSED"
-LICENSE_${PN}-lib-safe-buffer = "MIT"
-LICENSE_${PN}-lib-semver-diff-semver = "ISC"
-LICENSE_${PN}-lib-semver-diff = "MIT"
-LICENSE_${PN}-lib-semver-utils = "Apache-2.0"
-LICENSE_${PN}-lib-semver = "BSD"
-LICENSE_${PN}-lib-shell-quote = "MIT"
-LICENSE_${PN}-lib-signal-exit = "ISC"
-LICENSE_${PN}-lib-slide = "ISC"
-LICENSE_${PN}-lib-sntp-hoek = "BSD-3-Clause"
-LICENSE_${PN}-lib-sntp = "CLOSED"
-LICENSE_${PN}-lib-sort-keys-length = "MIT"
-LICENSE_${PN}-lib-sort-keys = "MIT"
-LICENSE_${PN}-lib-spdx-correct = "Apache-2.0"
-LICENSE_${PN}-lib-spdx-expression-parse = "MIT"
-LICENSE_${PN}-lib-spdx-license-ids = "CLOSED"
-LICENSE_${PN}-lib-sshpk = "MIT"
-LICENSE_${PN}-lib-string-decoder = "MIT"
-LICENSE_${PN}-lib-string-width = "MIT"
-LICENSE_${PN}-lib-stringify-object = "MIT"
-LICENSE_${PN}-lib-stringstream = "MIT"
-LICENSE_${PN}-lib-strip-ansi = "MIT"
-LICENSE_${PN}-lib-strip-bom = "MIT"
-LICENSE_${PN}-lib-strip-indent = "MIT"
-LICENSE_${PN}-lib-strip-json-comments = "MIT"
-LICENSE_${PN}-lib-tar-fs-minimist = "MIT"
-LICENSE_${PN}-lib-tar-fs-mkdirp = "MIT"
-LICENSE_${PN}-lib-tar-fs = "MIT"
-LICENSE_${PN}-lib-tar-stream-bl = "MIT"
-LICENSE_${PN}-lib-tar-stream = "MIT"
-LICENSE_${PN}-lib-throttleit = "MIT"
-LICENSE_${PN}-lib-through = "CLOSED MIT"
-LICENSE_${PN}-lib-timed-out = "MIT"
-LICENSE_${PN}-lib-tmp = "MIT"
-LICENSE_${PN}-lib-touch-nopt = "MIT"
-LICENSE_${PN}-lib-touch = "ISC"
-LICENSE_${PN}-lib-traverse = "MIT"
-LICENSE_${PN}-lib-trim-newlines = "MIT"
-LICENSE_${PN}-lib-tunnel-agent = "Apache-2.0"
-LICENSE_${PN}-lib-tweetnacl = "CLOSED"
-LICENSE_${PN}-lib-uglify-js-source-map = "BSD-3-Clause"
-LICENSE_${PN}-lib-uglify-js = "BSD-2-Clause"
-LICENSE_${PN}-lib-uglify-to-browserify = "MIT"
-LICENSE_${PN}-lib-untildify = "MIT"
-LICENSE_${PN}-lib-unzip-response = "MIT"
-LICENSE_${PN}-lib-update-notifier = "BSD-2-Clause"
-LICENSE_${PN}-lib-url-parse-lax = "MIT"
-LICENSE_${PN}-lib-user-home = "MIT"
-LICENSE_${PN}-lib-util-deprecate = "MIT"
-LICENSE_${PN}-lib-uuid = "MIT"
-LICENSE_${PN}-lib-validate-npm-package-license = "Apache-2.0"
-LICENSE_${PN}-lib-verror = "MIT"
-LICENSE_${PN}-lib-which = "ISC"
-LICENSE_${PN}-lib-widest-line = "MIT"
-LICENSE_${PN}-lib-window-size = "MIT"
-LICENSE_${PN}-lib-wrappy = "ISC"
-LICENSE_${PN}-lib-write-file-atomic = "ISC"
-LICENSE_${PN}-lib-xdg-basedir = "MIT"
-LICENSE_${PN}-lib-xtend = "MIT"
-LICENSE_${PN}-lib-yargs = "MIT"
-LICENSE_${PN} = "MIT"
+
+LICENSE_${PN} = "MIT ISC CLOSED"
 
 INSANE_SKIP_${PN} += "license-checksum host-user-contaminated"

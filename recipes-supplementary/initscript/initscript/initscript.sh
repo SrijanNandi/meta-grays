@@ -59,7 +59,7 @@ for ((i=0; i<${#array[@]}-1; i+=2)); do
     #xdp-mode: driver
     #xdp-filter-file:  /etc/suricata/ebpf/xdp_filter.bpf
     bypass: yes
-    copy-mode: ips
+    copy-mode: tap
     use-mmap: yes
     #ring-size: 500000
     #buffer-size: 5368709120
@@ -74,7 +74,7 @@ for ((i=0; i<${#array[@]}-1; i+=2)); do
     #xdp-mode: driver
     #xdp-filter-file:  /etc/suricata/ebpf/xdp_filter.bpf
     bypass: yes
-    copy-mode: ips
+    copy-mode: tap
     use-mmap: yes
     #ring-size: 500000
     #buffer-size: 5368709120

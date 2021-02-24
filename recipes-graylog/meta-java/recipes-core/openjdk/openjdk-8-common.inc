@@ -42,6 +42,21 @@ do_unpack_extract_submodules () {
     tar xjf ${WORKDIR}/${NASHORN_FILE_LOCAL} --transform "s,-${NASHORN_CHANGESET},,g"
 }
 
+do_patch_prepend() {
+    # use do_patch_prepend syntax and not pre/postfuncs to
+    # call do_unpack_extract_submodules
+    # *) the archiver.bbclass modifies WORKDIR, S, B,...
+    #    and those modifications are lost otherwise,
+    #    which leads to build failures in do_unpack_and_patch -> do_patch
+    func = 'do_unpack_extract_submodules'
+    bb.build.exec_func(func, d)
+
+    # delete X11 wrappers if x11 is not part of PACKAGECONFIG
+    if bb.utils.contains('PACKAGECONFIG', 'x11', False, True, d):
+       func_delete = 'do_unpack_delete_X11_wrappers'
+       bb.build.exec_func(func_delete, d)
+}
+
 do_unpack_delete_X11_wrappers() {
     find ${S}/jdk/src/solaris/classes/sun/awt/X11 -maxdepth 1 -name '*.java' -delete
 }
@@ -96,10 +111,7 @@ def package_config_option_cleanup(d):
     if not option_headless and not with_cups:
         option_headless = True
 
-    if not option_soundless and not with_alsa:
-        option_soundless = True
-
-    if not option_soundless and not with_pulseaudio:
+    if not option_soundless and not with_pulseaudio and not with_alsa:
         option_soundless = True
 
     options = {'make': [], 'cpp': [], 'env': [], 'configure': ["--disable-ccache"] }
@@ -155,8 +167,8 @@ def jdk_configure_options(d):
     options = package_config_option_cleanup(d)
     return options[3]
 
-do_unpack[postfuncs] += "do_unpack_extract_submodules"
-do_unpack[postfuncs] += "${@bb.utils.contains('PACKAGECONFIG', 'x11', '', 'do_unpack_delete_X11_wrappers', d)}"
+#do_unpack[postfuncs] += "do_unpack_extract_submodules"
+#do_unpack[postfuncs] += "${@bb.utils.contains('PACKAGECONFIG', 'x11', '', 'do_unpack_delete_X11_wrappers', d)}"
 
 export DEBUG_BINARIES = "true"
 
